@@ -1,0 +1,58 @@
+{
+  "theme": {
+    "brand": "#e6c877",
+    "brandDark": "#b8891f",
+    "accent": "#e6c877"
+  },
+  "showAvatar": true,
+  "showQr": true,
+  "cardUrl": "https://cocokaraplus-max.github.io/meishi/",
+  "name": "山田 太郎",
+  "kana": "YAMADA TARO",
+  "title": "介護支援専門員",
+  "org": "ここからプラス",
+  "tagline": "ご相談はお気軽にどうぞ。タップで連絡先を保存できます。",
+  "profile": "介護支援専門員として15年。ご本人とご家族に寄り添い、その方らしい暮らしを一緒に考えます。ケアプラン作成や介護のご相談まで、まずはお気軽にご連絡ください。",
+  "avatar": "",
+  "contact": {
+    "phone": "090-0000-0000",
+    "email": "example@example.com",
+    "lineUrl": "https://line.me/ti/p/~",
+    "website": "https://example.com",
+    "address": "東京都〇〇区〇〇1-2-3",
+    "mapUrl": "https://maps.google.com/?q=東京都〇〇区〇〇1-2-3"
+  },
+  "links": [
+    {
+      "type": "web",
+      "title": "ホームページ",
+      "sub": "example.com",
+      "url": "https://example.com"
+    },
+    {
+      "type": "instagram",
+      "title": "Instagram",
+      "sub": "@example",
+      "url": "https://instagram.com/example"
+    },
+    {
+      "type": "line",
+      "title": "LINE公式アカウント",
+      "sub": "友だち追加",
+      "url": "https://line.me/ti/p/~"
+    },
+    {
+      "type": "x",
+      "title": "X（旧Twitter）",
+      "sub": "@example",
+      "url": "https://x.com/example"
+    },
+    {
+      "type": "youtube",
+      "title": "YouTube",
+      "sub": "チャンネル",
+      "url": "https://youtube.com/@example"
+    }
+  ],
+  "footer": "© ここからプラス"
+}
