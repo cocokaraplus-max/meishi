@@ -23,19 +23,18 @@ body{
 .wrap{width:100%;max-width:432px}
 
 /* ===== ヘッダーカード（グラデ細枠＋グラス） ===== */
-.hero{position:relative;background:var(--card);border-radius:var(--radius);overflow:hidden;
-  backdrop-filter:blur(16px) saturate(140%);-webkit-backdrop-filter:blur(16px) saturate(140%);
-  box-shadow:0 30px 70px rgba(0,0,0,.6), 0 0 60px var(--glow-soft);}
-.hero::before{content:"";position:absolute;inset:0;border-radius:var(--radius);padding:1.4px;
-  background:var(--grad);-webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);
-  -webkit-mask-composite:xor;mask-composite:exclude;pointer-events:none;opacity:.9}
-.cover{height:128px;position:relative;
-  background:linear-gradient(135deg,var(--cover-a) 0%,var(--cover-b) 100%);}
-.cover::after{content:"";position:absolute;inset:0;
+.hero{position:relative;border-radius:var(--radius);overflow:hidden;
   background:
-    radial-gradient(70% 130% at 78% 0%, var(--glow-strong), transparent 58%),
-    linear-gradient(115deg, transparent 40%, rgba(255,255,255,.06) 50%, transparent 60%);}
-.hero-body{padding:0 26px 28px;text-align:center;position:relative}
+    radial-gradient(88% 52% at 78% 0%, var(--glow-strong), transparent 55%),
+    linear-gradient(180deg, var(--cover-a) 0%, var(--cover-b) 40%, var(--bg-base) 100%);
+  box-shadow:0 30px 70px rgba(0,0,0,.6), 0 0 60px var(--glow-soft);}
+.hero::before{content:"";position:absolute;inset:0;border-radius:var(--radius);padding:1.6px;
+  background:var(--grad);-webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);
+  -webkit-mask-composite:xor;mask-composite:exclude;pointer-events:none;opacity:1;z-index:3}
+.cover{height:128px;position:relative;background:transparent;pointer-events:none;z-index:0}
+.cover::after{content:"";position:absolute;inset:0;
+  background:linear-gradient(115deg, transparent 42%, rgba(255,255,255,.06) 50%, transparent 58%);}
+.hero-body{padding:0 26px 28px;text-align:center;position:relative;z-index:1}
 
 /* アバター：グラデリング＋グロー */
 .avatar{width:114px;height:114px;border-radius:50%;margin:-60px auto 0;position:relative;z-index:1;
