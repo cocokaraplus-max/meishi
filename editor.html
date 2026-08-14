@@ -100,6 +100,11 @@ a{color:var(--ac)}
         </div>
         <p class="hint">画像は自動で正方形に縮小してファイルに埋め込みます（外部公開なし）。未設定なら氏名の頭文字を表示。</p>
         <div id="avatarAdjust" style="margin-top:6px;border-top:1px solid var(--line);padding-top:12px">
+          <div style="display:flex;justify-content:center;margin:4px 0 12px">
+            <div id="cropCircle" style="width:140px;height:140px;border-radius:50%;overflow:hidden;border:3px solid var(--ac2);background:#eee;box-shadow:0 6px 18px rgba(0,0,0,.18)">
+              <img id="cropImg" style="width:100%;height:100%;object-fit:cover;display:block">
+            </div>
+          </div>
           <label>ズーム（拡大） <span id="zoomVal" class="small"></span></label>
           <input type="range" id="a_zoom" min="1" max="3" step="0.05" style="width:100%">
           <label>横位置（左右）</label>
@@ -107,7 +112,7 @@ a{color:var(--ac)}
           <label>縦位置（上下）</label>
           <input type="range" id="a_y" min="-60" max="60" step="1" style="width:100%">
           <div class="foot-actions"><button class="mini" id="a_reset" type="button">位置をリセット</button></div>
-          <p class="hint">スライダーを動かすと右のプレビューで、円の中の写真の位置とズームが変わります。</p>
+          <p class="hint">上の丸いプレビューを見ながら、スライダーで写真の位置とズームを調整できます。</p>
         </div>
       </div>
     </div>
@@ -221,9 +226,10 @@ $('f_showQr').addEventListener('change',function(){state.showQr=$('f_showQr').ch
 $('f_cardUrl').addEventListener('input',function(){state.cardUrl=$('f_cardUrl').value;pushPreview();});
 
 // ---- 写真 ----
-function updateAvatarPrev(){var img=$('avatarPrev');if(state.avatar){img.src=state.avatar;}else{img.removeAttribute('src');}var ad=$('avatarAdjust');if(ad)ad.style.display=state.avatar?'':'none';}
-function initAdjust(){state.avatarAdjust=state.avatarAdjust||{zoom:1,x:0,y:0};$('a_zoom').value=state.avatarAdjust.zoom;$('a_x').value=state.avatarAdjust.x;$('a_y').value=state.avatarAdjust.y;$('zoomVal').textContent='×'+(parseFloat(state.avatarAdjust.zoom)||1).toFixed(2);}
-function setAdj(){state.avatarAdjust={zoom:parseFloat($('a_zoom').value),x:parseInt($('a_x').value,10),y:parseInt($('a_y').value,10)};$('zoomVal').textContent='×'+state.avatarAdjust.zoom.toFixed(2);pushPreview();}
+function updateCrop(){var im=$('cropImg');if(!im)return;if(state.avatar){im.src=state.avatar;var a=state.avatarAdjust||{};im.style.transform='translate('+(a.x||0)+'%,'+(a.y||0)+'%) scale('+(a.zoom||1)+')';im.style.transformOrigin='center';}else{im.removeAttribute('src');}}
+function updateAvatarPrev(){var img=$('avatarPrev');if(state.avatar){img.src=state.avatar;}else{img.removeAttribute('src');}var ad=$('avatarAdjust');if(ad)ad.style.display=state.avatar?'':'none';updateCrop();}
+function initAdjust(){state.avatarAdjust=state.avatarAdjust||{zoom:1,x:0,y:0};$('a_zoom').value=state.avatarAdjust.zoom;$('a_x').value=state.avatarAdjust.x;$('a_y').value=state.avatarAdjust.y;$('zoomVal').textContent='×'+(parseFloat(state.avatarAdjust.zoom)||1).toFixed(2);updateCrop();}
+function setAdj(){state.avatarAdjust={zoom:parseFloat($('a_zoom').value),x:parseInt($('a_x').value,10),y:parseInt($('a_y').value,10)};$('zoomVal').textContent='×'+state.avatarAdjust.zoom.toFixed(2);updateCrop();pushPreview();}
 ['a_zoom','a_x','a_y'].forEach(function(id){$(id).addEventListener('input',setAdj);});
 $('a_reset').addEventListener('click',function(){$('a_zoom').value=1;$('a_x').value=0;$('a_y').value=0;setAdj();});
 $('f_avatarFile').addEventListener('change',function(e){
