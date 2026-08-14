@@ -98,7 +98,7 @@ a{color:var(--ac)}
             </div>
           </div>
         </div>
-        <p class="hint">画像は自動で正方形に縮小してファイルに埋め込みます（外部公開なし）。未設定なら氏名の頭文字を表示。</p>
+        <p class="hint">元の写真をそのまま取り込み、下のスライダーで円に合わせて位置・ズームを調整できます（切り抜かないので頭が切れません／外部公開なし）。未設定なら氏名の頭文字を表示。</p>
         <div id="avatarAdjust" style="margin-top:6px;border-top:1px solid var(--line);padding-top:12px">
           <div style="display:flex;justify-content:center;margin:4px 0 12px">
             <div id="cropCircle" style="width:140px;height:140px;border-radius:50%;overflow:hidden;border:3px solid var(--ac2);background:#eee;box-shadow:0 6px 18px rgba(0,0,0,.18)">
@@ -238,10 +238,13 @@ $('f_avatarFile').addEventListener('change',function(e){
   r.onload=function(){
     var im=new Image();
     im.onload=function(){
-      var S=512,c=document.createElement('canvas');c.width=S;c.height=S;var ctx=c.getContext('2d');
-      var s=Math.min(im.width,im.height),sx=(im.width-s)/2,sy=(im.height-s)/2;
-      ctx.drawImage(im,sx,sy,s,s,0,0,S,S);
+      // 元画像をそのまま保持（切り抜かない）。長辺720pxに縮小するだけ。
+      var maxDim=720, w=im.width, h=im.height, sc=Math.min(1, maxDim/Math.max(w,h));
+      var cw=Math.max(1,Math.round(w*sc)), ch=Math.max(1,Math.round(h*sc));
+      var c=document.createElement('canvas');c.width=cw;c.height=ch;var ctx=c.getContext('2d');
+      ctx.drawImage(im,0,0,cw,ch);
       state.avatar=c.toDataURL('image/jpeg',0.85);
+      state.avatarAdjust={zoom:1,x:0,y:0}; initAdjust();
       updateAvatarPrev();pushPreview();
     };
     im.src=r.result;
