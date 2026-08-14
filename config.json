@@ -4,7 +4,7 @@
     "brandDark": "#b8891f",
     "accent": "#e6c877"
   },
-  "showAvatar": false,
+  "showAvatar": true,
   "showQr": true,
   "cardUrl": "https://cocokaraplus-max.github.io/meishi/",
   "name": "岸本洋幸",
